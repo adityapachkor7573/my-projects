@@ -1,0 +1,109 @@
+<!-- Basic Job Board - HTML, CSS, JS Version -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Board</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #343a40;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .job {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+    }
+    .job h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+    .job p {
+      margin: 0.5rem 0;
+    }
+    form {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+    form input, form button {
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    form button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Job Board</h1>
+  </header>
+  <div class="container">
+    <div id="jobs"></div>
+    <form id="jobForm">
+      <input type="text" id="title" placeholder="Job Title" required />
+      <input type="text" id="company" placeholder="Company" required />
+      <input type="text" id="location" placeholder="Location" required />
+      <button type="submit">Post Job</button>
+    </form>
+  </div>
+  <script>
+    const jobs = [];
+
+    function renderJobs() {
+      const jobContainer = document.getElementById('jobs');
+      jobContainer.innerHTML = '';
+      jobs.forEach((job, index) => {
+        const jobEl = document.createElement('div');
+        jobEl.className = 'job';
+        jobEl.innerHTML = `
+          <h2>${job.title}</h2>
+          <p><strong>Company:</strong> ${job.company}</p>
+          <p><strong>Location:</strong> ${job.location}</p>
+        `;
+        jobContainer.appendChild(jobEl);
+      });
+    }
+
+    document.getElementById('jobForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const company = document.getElementById('company').value;
+      const location = document.getElementById('location').value;
+
+      jobs.push({ title, company, location });
+      renderJobs();
+
+      // Clear form
+      this.reset();
+    });
+
+    // Initial render
+    renderJobs();
+  </script>
+</body>
+</html>

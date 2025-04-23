@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Aditya Pachkor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Aditya Pachkor</h1>
+    <p>Software Developer | Tech Enthusiast | Open Source Contributor</p>
+  </header>
+
+  <section>
+    <h2>About Me</h2>
+    <p>I am Aditya Pachkor, a passionate and dedicated software developer...</p>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <ul class="skills">
+      <li>HTML5 & CSS3</li>
+      <li>JavaScript</li>
+      <li>MongoDB</li>
+      <li>Python</li>
+      <li>Team Collaboration</li>
+      <li>Problem Solving</li>
+      <li>Effective Communication</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>A dynamic and responsive portfolio site...</p>
+        <a href="https://dainty-mandazi-1ba848.netlify.app/">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Task Manager App</h3>
+        <p>A full-stack web application...</p>
+        <a href="#">View Project</a>
+      </div>
+      <div class="project-card">
+        <h3>Traffic Management System</h3>
+        <p>A Traffic Management System optimizes traffic flow and safety using real-time data, smart signals, and incident detection to reduce congestion...</p>
+        <a href="https://trafficmanagementsystem-adityapachkor.netlify.app/">View Project</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Contact Me</h2>
+    <form id="contactForm">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Popup Overlay -->
+  <div id="popupOverlay" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1000;">
+    <div id="popupWindow" style="background:white; padding:2rem; margin:10% auto; width:300px; border-radius:1rem; text-align:center;">
+      <p id="popupMessage">Message sent successfully!</p>
+      <button id="closePopupButton">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; <span id="year"></span> Aditya Pachkor. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
