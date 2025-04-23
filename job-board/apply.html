@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Apply for Job</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+
+    .job-card {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #4f46e5;
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #3730a3;
+    }
+
+    .btn-apply {
+      background-color: #10b981;
+    }
+
+    .btn-apply:hover {
+      background-color: #059669;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="btn">← Back</a>
+
+  <div class="job-card" id="apply-job-card">
+    <h2>Loading job info...</h2>
+    <form id="apply-form">
+      <label>Your Name:</label>
+      <input type="text" name="name" required />
+
+      <label>Email:</label>
+      <input type="email" name="email" required />
+
+      <label>Cover Letter:</label>
+      <textarea name="cover_letter" rows="4" required></textarea>
+
+      <!-- Hidden input for job id -->
+      <input type="hidden" name="job_id" id="job_id" />
+
+      <button type="submit" class="btn btn-apply">Submit Application</button>
+    </form>
+  </div>
+
+  <script>
+    const jobs = [
+      { id: 1, title: "Frontend Developer" },
+      { id: 2, title: "Backend Developer" },
+      { id: 3, title: "UI/UX Designer" },
+      { id: 4, title: "Data Scientist" },
+      { id: 5, title: "Marketing Manager" },
+      { id: 6, title: "Project Manager" },
+      { id: 7, title: "DevOps Engineer" },
+      { id: 8, title: "Content Writer" },
+      { id: 9, title: "QA Engineer" },
+      { id: 10, title: "HR Specialist" }
+    ];
+
+    function getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+
+    function loadJobInfo() {
+      const jobId = Number(getQueryParam('id'));
+      const job = jobs.find(j => j.id === jobId);
+      const card = document.getElementById('apply-job-card');
+      const jobIdInput = document.getElementById('job_id');
+
+      if (!job) {
+        card.innerHTML = `<p style="color:red; text-align:center;">Job not found. Please go back and select a valid job.</p>`;
+        return;
+      }
+
+      card.querySelector('h2').textContent = `Apply for ${job.title}`;
+      jobIdInput.value = job.id;
+    }
+
+    loadJobInfo();
+
+    const form = document.getElementById('apply-form');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const jobId = document.getElementById('job_id').value;
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const coverLetter = form.cover_letter.value.trim();
+
+      if (!jobId || !name || !email || !coverLetter) {
+        alert('Please fill all fields.');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ job_id: jobId, name, email, cover_letter: coverLetter }),
+        });
+
+        const result = await response.json();
+        alert(result.message || result.error);
+        if (response.ok) form.reset();
+      } catch (error) {
+        alert('Submission failed. Please try again later.');
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>

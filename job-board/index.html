@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Job Listings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      margin: 0;
+      padding: 40px 20px;
+      color: #e0e7ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 40px;
+      color: #c7d2fe;
+      text-shadow: 0 0 8px rgba(199, 210, 254, 0.7);
+    }
+    .job-list {
+      max-width: 900px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    .job-card {
+      background: #1e293b;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(100, 116, 139, 0.5);
+      padding: 20px;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .job-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: #c7d2fe;
+      text-shadow: 0 0 5px rgba(199, 210, 254, 0.6);
+    }
+    .job-company {
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #93c5fd;
+    }
+    .job-info {
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+      color: #a5b4fc;
+    }
+    a.btn-details {
+      text-decoration: none;
+      color: #e0e7ff;
+      background-color: #4f46e5;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.6);
+      transition: background-color 0.3s ease;
+    }
+    a.btn-details:hover {
+      background-color: #3730a3;
+      box-shadow: 0 6px 18px rgba(55, 48, 163, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <h1>Job Listings</h1>
+  <div class="job-list" id="job-list">
+    <!-- Jobs will be loaded here dynamically -->
+  </div>
+
+  <script>
+    const jobs = [
+      {id:1, title:"Frontend Developer", company:"TechCorp", location:"New York, NY", salary:"$80k - $100k", category:"Software Development"},
+      {id:2, title:"Backend Developer", company:"InnovateX", location:"San Francisco, CA", salary:"$90k - $120k", category:"Software Development"},
+      {id:3, title:"UI/UX Designer", company:"Creative Minds", location:"Remote", salary:"$60k - $85k", category:"Design"},
+      {id:4, title:"Data Scientist", company:"DataWorks", location:"Boston, MA", salary:"$100k - $130k", category:"Data Science"},
+      {id:5, title:"Marketing Manager", company:"BrandBoost", location:"Chicago, IL", salary:"$70k - $90k", category:"Marketing"},
+      {id:6, title:"Project Manager", company:"BuildIt", location:"Seattle, WA", salary:"$85k - $110k", category:"Management"},
+      {id:7, title:"DevOps Engineer", company:"CloudOps", location:"Austin, TX", salary:"$95k - $125k", category:"IT Operations"},
+      {id:8, title:"Content Writer", company:"WriteWell", location:"Remote", salary:"$50k - $70k", category:"Content"},
+      {id:9, title:"QA Engineer", company:"QualityFirst", location:"Denver, CO", salary:"$70k - $90k", category:"Quality Assurance"},
+      {id:10, title:"HR Specialist", company:"PeoplePros", location:"Miami, FL", salary:"$60k - $80k", category:"Human Resources"}
+    ];
+
+    const container = document.getElementById('job-list');
+
+    jobs.forEach(job => {
+      const jobEl = document.createElement('div');
+      jobEl.className = 'job-card';
+      jobEl.innerHTML = `
+        <div>
+          <h3 class="job-title">${job.title}</h3>
+          <p class="job-company">${job.company}</p>
+          <p class="job-info">📍 ${job.location} | 💰 ${job.salary} | 🏷️ ${job.category}</p>
+        </div>
+        <a href="job details.html?id=${job.id}" class="btn-details">View Details</a>
+      `;
+      container.appendChild(jobEl);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Job Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      margin: 0;
+      padding: 40px 20px;
+      color: #e0e7ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    a.btn {
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #e0e7ff;
+      background-color: #4f46e5;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.6);
+      margin-bottom: 30px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    a.btn:hover {
+      background-color: #3730a3;
+      box-shadow: 0 6px 18px rgba(55, 48, 163, 0.8);
+    }
+    a.btn-apply {
+      background-color: #10b981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.6);
+    }
+    a.btn-apply:hover {
+      background-color: #059669;
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.8);
+    }
+    .job-card {
+      background: #1e293b;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(100, 116, 139, 0.5);
+      max-width: 800px;
+      padding: 30px 40px;
+      color: #cbd5e1;
+    }
+    .job-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #c7d2fe;
+      text-shadow: 0 0 8px rgba(199, 210, 254, 0.7);
+    }
+    .job-company {
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+      color: #93c5fd;
+      font-weight: 600;
+    }
+    .job-info {
+      font-size: 1rem;
+      margin-bottom: 25px;
+      color: #a5b4fc;
+      font-weight: 500;
+    }
+    .job-description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #e0e7ff;
+      margin-bottom: 30px;
+    }
+    .job-description ul {
+      margin-top: 10px;
+      padding-left: 20px;
+      list-style-type: disc;
+      color: #bae6fd;
+    }
+    .job-actions {
+      display: flex;
+      justify-content: flex-start;
+    }
+    .error-message {
+      color: #f87171;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-align: center;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="btn">← Back to Job Listings</a>
+
+  <div class="job-card" id="job-details">
+    <!-- Job details will be dynamically inserted here -->
+  </div>
+
+  <script>
+    const jobs = [
+      {
+        id: 1,
+        title: "Frontend Developer",
+        company: "TechCorp",
+        location: "New York, NY",
+        salary: "$80k - $100k",
+        category: "Software Development",
+        description: `We are looking for a talented Frontend Developer to join our team. You will work on exciting web projects, build beautiful interfaces, and collaborate with designers and backend developers.`,
+        skills: [
+          "Strong HTML, CSS, JavaScript",
+          "Experience with React or similar frameworks",
+          "Good understanding of responsive design",
+          "Team player with attention to detail"
+        ]
+      },
+      {
+        id: 2,
+        title: "Backend Developer",
+        company: "InnovateX",
+        location: "San Francisco, CA",
+        salary: "$90k - $120k",
+        category: "Software Development",
+        description: `Seeking a Backend Developer skilled in Node.js and databases to build scalable APIs and services.`,
+        skills: [
+          "Node.js & Express",
+          "Database management (SQL/NoSQL)",
+          "REST API development",
+          "Security best practices"
+        ]
+      },
+      {
+        id: 3,
+        title: "UI/UX Designer",
+        company: "Creative Minds",
+        location: "Remote",
+        salary: "$60k - $85k",
+        category: "Design",
+        description: `Design intuitive user interfaces and experiences for web and mobile applications.`,
+        skills: [
+          "Figma/Sketch proficiency",
+          "User research and prototyping",
+          "Strong visual design skills",
+          "Collaboration with developers"
+        ]
+      },
+      {
+        id: 4,
+        title: "Data Scientist",
+        company: "DataWorks",
+        location: "Boston, MA",
+        salary: "$100k - $130k",
+        category: "Data Science",
+        description: `Analyze large datasets and build predictive models to support business decisions.`,
+        skills: [
+          "Python & R",
+          "Machine learning algorithms",
+          "Data visualization",
+          "Statistical analysis"
+        ]
+      },
+      {
+        id: 5,
+        title: "Marketing Manager",
+        company: "BrandBoost",
+        location: "Chicago, IL",
+        salary: "$70k - $90k",
+        category: "Marketing",
+        description: `Lead marketing campaigns and manage digital marketing strategies to boost brand presence.`,
+        skills: [
+          "SEO & SEM",
+          "Content marketing",
+          "Social media management",
+          "Analytics tools"
+        ]
+      },
+      {
+        id: 6,
+        title: "Project Manager",
+        company: "BuildIt",
+        location: "Seattle, WA",
+        salary: "$85k - $110k",
+        category: "Management",
+        description: `Oversee project timelines, coordinate teams, and ensure timely delivery of projects.`,
+        skills: [
+          "Agile & Scrum",
+          "Risk management",
+          "Excellent communication",
+          "Resource planning"
+        ]
+      },
+      {
+        id: 7,
+        title: "DevOps Engineer",
+        company: "CloudOps",
+        location: "Austin, TX",
+        salary: "$95k - $125k",
+        category: "IT Operations",
+        description: `Manage infrastructure, CI/CD pipelines, and ensure system reliability.`,
+        skills: [
+          "AWS/GCP/Azure",
+          "Docker & Kubernetes",
+          "Monitoring & alerting",
+          "Automation scripting"
+        ]
+      },
+      {
+        id: 8,
+        title: "Content Writer",
+        company: "WriteWell",
+        location: "Remote",
+        salary: "$50k - $70k",
+        category: "Content",
+        description: `Create engaging blog posts, articles, and website content.`,
+        skills: [
+          "Excellent writing skills",
+          "SEO knowledge",
+          "Research skills",
+          "Adaptability"
+        ]
+      },
+      {
+        id: 9,
+        title: "QA Engineer",
+        company: "QualityFirst",
+        location: "Denver, CO",
+        salary: "$70k - $90k",
+        category: "Quality Assurance",
+        description: `Test software products and ensure quality standards are met before release.`,
+        skills: [
+          "Manual and automated testing",
+          "Selenium or similar tools",
+          "Bug tracking",
+          "Attention to detail"
+        ]
+      },
+      {
+        id: 10,
+        title: "HR Specialist",
+        company: "PeoplePros",
+        location: "Miami, FL",
+        salary: "$60k - $80k",
+        category: "Human Resources",
+        description: `Manage recruitment, employee relations, and HR policies.`,
+        skills: [
+          "Recruitment processes",
+          "Employee engagement",
+          "Policy development",
+          "Communication skills"
+        ]
+      }
+    ];
+
+    function getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+
+    function renderJobDetails(jobId) {
+      const job = jobs.find(j => j.id === Number(jobId));
+      const container = document.getElementById('job-details');
+
+      if (!job) {
+        container.innerHTML = `<p class="error-message">Job not found. Please go back and select a valid job.</p>`;
+        return;
+      }
+
+      container.innerHTML = `
+        <h2 class="job-title">${job.title}</h2>
+        <p class="job-company">${job.company}</p>
+        <p class="job-info">📍 ${job.location} | 💰 ${job.salary} | 🏷️ ${job.category}</p>
+        <div class="job-description">
+          <p>${job.description}</p>
+          <p><strong>Skills required:</strong></p>
+          <ul>
+            ${job.skills.map(skill => `<li>${skill}</li>`).join('')}
+          </ul>
+        </div>
+        <div class="job-actions">
+          <a href="apply.html?id=${job.id}" class="btn btn-apply">Apply Now</a>
+        </div>
+      `;
+    }
+
+    const jobId = getQueryParam('id') || '1';
+    renderJobDetails(jobId);
+  </script>
+
+</body>
+</html>
