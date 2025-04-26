@@ -56,8 +56,8 @@ netflix-landing-page/
 ## License
 
 This project is for educational and personal use only.
-
 ---
-
 Feel free to customize and expand this template to add more interactivity or real backend integration!
 
+## Contact
+For questions or feedback, please contact [ADITYA PACHKOR // pachkoraditya50@gmail.com].
