@@ -45,6 +45,8 @@ ul.skills li {
   padding: 1.5rem;
   border-radius: 1rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  color: #1f2937;
+  line-height: 1.5;
 }
 .project-card a {
   display: inline-block;
